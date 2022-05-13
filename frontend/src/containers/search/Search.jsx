@@ -1,6 +1,5 @@
 import React from 'react'
 import searchIcon from "../../assets/search-icon.svg"
-import checkboxIcon from "../../assets/checkbox.svg"
 import './search.css'
 
 const Search = () => {
@@ -23,7 +22,6 @@ const Search = () => {
                         </div>
                         <div className='wte__search-checkbox'>
                             <input type="checkbox" id="isCurrentLocation"/>
-                            <img src={checkboxIcon} alt="checkbox icon" />
                             <label for="isCurrentLocation">Choose your current location</label>
                         </div>
                         <div className='wte__search-numberbox'>
