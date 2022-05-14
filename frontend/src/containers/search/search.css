@@ -148,3 +148,9 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+
+.wte__search-numberbox {
+    font-family: var(--font-family);
+    font-size: 16px;
+    color: var(--color-gray);
+}

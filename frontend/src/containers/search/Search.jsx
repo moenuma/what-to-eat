@@ -20,10 +20,6 @@ const Search = () => {
                                 <div className="wte__search-textbox-str">Name of location</div>
                             </label>
                         </div>
-                        {/* <div className='wte__search-checkbox'>
-                            <input type="checkbox" id="isCurrentLocation"/>
-                            <label for="isCurrentLocation">Choose your current location</label>
-                        </div> */}
                         <label className='wte__search-checkbox'>Choose your current location
                             <input type="checkbox" />
                             <span className='wte__search-checkmark'></span>
@@ -41,10 +37,6 @@ const Search = () => {
                                 <div className='wte__search-textbox-str'>Food category you'd like</div>
                             </label>
                         </div>
-                        {/* <div className='wte__search-checkbox'>
-                            <input type="checkbox" id="randomizeCategory"/>
-                            <label for="randomizeCategory">Randomize the food category</label>
-                        </div> */}
                         <label className='wte__search-checkbox'>Randomize the food category
                             <input type="checkbox" />
                             <span className='wte__search-checkmark'></span>
