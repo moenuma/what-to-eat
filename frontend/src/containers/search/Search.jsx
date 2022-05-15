@@ -24,9 +24,9 @@ const Search = () => {
                             <input type="checkbox" />
                             <span className='wte__search-checkmark'></span>
                         </label>
-                        <div className='wte__search-numberbox'>
+                        <div className='wte__search-textbox wte__search-numberbox'>
                             <label for="searchRadius">Search radius:</label>
-                            <input type="number" id="searchRadius"/><span>km</span>
+                            <input type="number" id="searchRadius" min="0.1" max="10.0" /><span>km</span>
                         </div>
                     </div>
                     <div className='wte__search-content'>
