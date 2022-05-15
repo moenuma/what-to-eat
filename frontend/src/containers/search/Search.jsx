@@ -44,8 +44,7 @@ const Search = () => {
                     </div>
                 </div>
                 <div className='wte__search-button'>
-                    <button type="submit">Search</button>
-                    <img src={searchIcon} alt="search icon" />
+                    <button type="submit">Search<img src={searchIcon} alt="search icon" /></button>
                     <p>I'm hungry...</p>
                 </div>
             </div>
