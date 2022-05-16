@@ -1,10 +1,37 @@
 .wte__search {
-    margin: 0 6.6%;
+    background-image: url(../../assets/eating.svg);
+    background-repeat: no-repeat;
+    background-size: 45rem;
+    background-position: bottom 11.5rem right 6.5rem;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+    .wte__search {
+        background-size: 35rem;
+        background-position: bottom 9rem right 3rem;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .wte__search {
+        background-size: 25rem;
+        background-position: bottom 7rem right 1rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .wte__search {
+        background-position: 50% 75%;
+    }
 }
 
 .wte__search-container {
     display: flex;
     flex-direction: column;
+    margin: 0 6.6%;
 }
 
 .wte__search-content {
@@ -153,7 +180,6 @@
     font-family: var(--font-family);
     font-size: 17px;
     color: var(--color-gray);
-    /* margin: 1.5rem 0 0; */
 }
 
 .wte__search-numberbox label {
@@ -178,42 +204,102 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    position: fixed;
+    bottom: 5rem;
+    left: 50%;
+    right: 50%;
 }
 
 .wte__search-button button {
-    width: 160px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #fff;
-    cursor: pointer;
-    margin: 20px;
-    height: 55px;
-    text-align:center;
-    border: none;
-    background-size: 300% 100%;
-    border-radius: 50px;
-    /* moz-transition: all .4s ease-in-out; */
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
-    background-image: linear-gradient(
-    to right,
-    #667eea,
-    #764ba2,
-    #6b8dd6,
-    #8e37d7
-  );
-  box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+    display: flex;
+    align-items: center;
+    padding: 0.4em 1.1em;
+    margin: 0 0.1em 0.1em 0;
+    border: 0.16em solid var(--color-ivory);
+    background-color: var(--color-green);
+    border-radius: 0.5em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: 0.06em;
+    color: var(--color-ivory);
+    text-align: center;
+    transition: all 0.5s;
+}
+
+.wte__search-button button:after {
+    background-image: url(../../assets/search-icon.svg);
+    background-size: 25px 25px;
+    display: inline-block;
+    width: 25px; 
+    height: 25px;
+    content:"";
+    margin-left: 5px;
+    transition: 0.5s;
 }
 
 .wte__search-button button:hover {
-    background-position: 100% 0;
-  /* moz-transition: all .4s ease-in-out; */
-  -o-transition: all .4s ease-in-out;
-  -webkit-transition: all .4s ease-in-out;
-  transition: all .4s ease-in-out;
+    border-color: var(--color-green);
+    background-color: var(--color-ivory);
+    color: var(--color-green);
 }
 
-.wte__search-button button:focus {
-    outline: none;
+.wte__search-button button:hover:after {
+    background-image: url(../../assets/search-icon-green.svg);
+    background-size: 25px 25px;
+    display: inline-block;
+    width: 25px; 
+    height: 25px;
+    content:"";
+    transition: 0.5s;
+}
+
+.wte__search-button p {
+    font-family: var(--font-family);
+    color: var(--color-gray);
+    width: 100px
+}
+
+.wte__search img {
+    position: fixed;
+    bottom: 0;
+}
+
+@media screen and (max-width: 900px) {
+    .wte__search h4 {
+        font-weight: 500;
+        font-size: 25px;
+        line-height: 35px;
+    }
+    .wte__search-textbox {
+        margin: 0.8rem 0;
+    }
+    .wte__search-textbox input {
+        height: 2.5rem;
+        font-size: 14px;
+    }
+    .wte__search-textbox-str {
+        font-size: 14px;
+    }
+    .wte__search-checkbox {
+        margin: 0.8rem 0;
+        font-size: 14px;
+        padding-left: 1.2rem;
+    }
+    .wte__search-checkmark {
+        height: 16px;
+        width: 16px;
+    }
+    .wte__search-numberbox {
+        font-size: 14px;
+    }
+    .wte__search-numberbox label {
+        margin-right: 0.6rem;
+    }
+    .wte__search-numberbox input {
+        width: 4.5rem;
+        height: 2rem;
+    }
 }

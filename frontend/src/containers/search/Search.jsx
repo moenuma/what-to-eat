@@ -1,5 +1,7 @@
 import React from 'react'
 import searchIcon from "../../assets/search-icon.svg"
+import searchIconGreen from "../../assets/search-icon-green.svg"
+import eating from "../../assets/eating.svg"
 import './search.css'
 
 const Search = () => {
@@ -44,7 +46,7 @@ const Search = () => {
                     </div>
                 </div>
                 <div className='wte__search-button'>
-                    <button type="submit">Search<img src={searchIcon} alt="search icon" /></button>
+                    <button type="submit">Search</button>
                     <p>I'm hungry...</p>
                 </div>
             </div>
