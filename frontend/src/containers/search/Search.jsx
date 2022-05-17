@@ -1,15 +1,7 @@
 import React from 'react'
-import searchIcon from "../../assets/search-icon.svg"
-import searchIconGreen from "../../assets/search-icon-green.svg"
-import eating from "../../assets/eating.svg"
 import './search.css'
 
 const Search = () => {
-    // let input_element = document.querySelector("input");
-    // input_element.addEventListener("keyup", () => {
-    //     input_element.setAttribute("value", input_element.value);
-    // })
-
     return (
         <form action="">
             <div className='wte__search'>
@@ -28,7 +20,7 @@ const Search = () => {
                         </label>
                         <div className='wte__search-textbox wte__search-numberbox'>
                             <label for="searchRadius">Search radius:</label>
-                            <input type="number" id="searchRadius" min="0.1" max="10.0" /><span>km</span>
+                            <input type="number" id="searchRadius" /><span>km</span>
                         </div>
                     </div>
                     <div className='wte__search-content'>
