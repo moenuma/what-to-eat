@@ -46,8 +46,11 @@
     color: var(--color-gray);
 }
 
-.wte__search-textbox {
+.wte__search-textblock {
     margin: 1rem 0;
+}
+
+.wte__search-textbox {
     position: relative;
 }
 
@@ -106,6 +109,14 @@
     transform: translate(0, -165%);
     padding: 0 0.2rem;
     margin: 0 0.6rem;
+}
+
+.wte__search-errormsg {
+    padding-top: 6px;
+    padding-left: 0.5rem;
+    color: var(--color-error);
+    font-family: var(--font-family);
+    font-size: 16px;
 }
 
 .wte__search-checkbox {
@@ -273,7 +284,7 @@
         font-size: 25px;
         line-height: 35px;
     }
-    .wte__search-textbox {
+    .wte__search-textblock {
         margin: 0.8rem 0;
     }
     .wte__search-textbox input {
