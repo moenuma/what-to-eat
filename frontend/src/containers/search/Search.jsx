@@ -13,6 +13,7 @@ class Search extends React.Component{
             isRandomCategory: false,
 
             hasLocationError: false,
+            hasRadiusError: false,
             hasCategoryError: false
         };
     }
@@ -24,13 +25,16 @@ class Search extends React.Component{
         let isLocationEmpty = this.state.locationName === "";
         let hasLocError = !this.state.isCurrentLocation && isLocationEmpty;
         let isCategoryEmpty = this.state.foodCategory === "";
-        let hasCategError = !this.state.isRandomCategory && isCategoryEmpty
+        let hasCategError = !this.state.isRandomCategory && isCategoryEmpty;
+        let isRadiusEmpty = this.state.searchRadius === "";
+        let hasRadiError = !this.state.isRadiusEmpty && isRadiusEmpty;
         this.setState({
             hasLocationError: hasLocError,
-            hasCategoryError: hasCategError
+            hasCategoryError: hasCategError,
+            hasRadiusError: hasRadiError
         })
 
-        if (hasLocError || hasCategError) {
+        if (hasLocError || hasCategError || hasRadiError) {
             return;
         }
         
@@ -76,7 +80,7 @@ class Search extends React.Component{
     }
 
     render() {
-        let locationErrorText, categoryErrorText;
+        let locationErrorText, categoryErrorText, radiusErrorText;
         if (this.state.hasLocationError) {
             locationErrorText = (
                 <p className='wte__search-errormsg'>Please enter location name or select your current location.</p>
@@ -85,6 +89,11 @@ class Search extends React.Component{
         if (this.state.hasCategoryError) {
             categoryErrorText = (
                 <p className='wte__search-errormsg'>Please enter food category or choose to randomize the category.</p>
+            )
+        }
+        if (this.state.hasRadiusError) {
+            radiusErrorText = (
+                <p className='wte__search-errormsg-radius'>Please enter search radius.</p>
             )
         }
         return (
@@ -119,6 +128,7 @@ class Search extends React.Component{
                                     onChange={(event) => {this.changeSearchRadius(event)}}
                                 />
                                 <span>km</span>
+                                {radiusErrorText}
                             </div>
                         </div>
                         <div className='wte__search-content'>

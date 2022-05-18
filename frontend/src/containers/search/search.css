@@ -17,13 +17,14 @@
 
 @media screen and (max-width: 750px) {
     .wte__search {
-        background-size: 25rem;
+        /* background-size: 30rem; */
         background-position: bottom 7rem right 1rem;
     }
 }
 
 @media screen and (max-width: 500px) {
     .wte__search {
+        background-size: 25rem;
         background-position: 50% 75%;
     }
 }
@@ -36,6 +37,7 @@
 
 .wte__search-content {
     padding-top: 2rem;
+    padding-bottom: 1.5rem;
 }
 
 .wte__search-content h4 {
@@ -111,9 +113,21 @@
     margin: 0 0.6rem;
 }
 
+.wte__search-textbox input:disabled {
+    background-color: var(--color-disabled);
+    transition: all 0.2s;
+}
+
 .wte__search-errormsg {
     padding-top: 6px;
     padding-left: 0.5rem;
+    color: var(--color-error);
+    font-family: var(--font-family);
+    font-size: 16px;
+}
+
+.wte__search-errormsg-radius {
+    margin-left: 0.5rem;
     color: var(--color-error);
     font-family: var(--font-family);
     font-size: 16px;
@@ -188,6 +202,8 @@
 }
 
 .wte__search-numberbox {
+    display: flex;
+    align-items: center;
     font-family: var(--font-family);
     font-size: 17px;
     color: var(--color-gray);
@@ -270,6 +286,7 @@
 .wte__search-button p {
     font-family: var(--font-family);
     color: var(--color-gray);
+    -webkit-text-stroke: 0.4px var(--color-ivory);
     width: 100px
 }
 
@@ -278,7 +295,10 @@
     bottom: 0;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
+    .wte__search-content {
+        padding-bottom: 0;
+    }
     .wte__search h4 {
         font-weight: 500;
         font-size: 25px;
@@ -312,5 +332,24 @@
     .wte__search-numberbox input {
         width: 4.5rem;
         height: 2rem;
+    }
+    .wte__search-errormsg {
+        font-size: 14px;
+    }
+    .wte__search-errormsg-radius {
+        font-size: 14px;
+    }
+    .wte__search-button {
+        bottom: 2rem;
+    }
+    .wte__search-button button {
+        padding: 0.4em 0.9em;
+        margin: 0 0.1em 0.1em 0;
+        font-size: 20px;
+        letter-spacing: 0.05em;
+    }
+    .wte__search-button p {
+        font-size: 13px;
+        -webkit-text-stroke: 0.2px var(--color-ivory);
     }
 }
