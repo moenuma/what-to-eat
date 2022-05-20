@@ -1,167 +1,119 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import { useForm, useWatch } from 'react-hook-form'
 import './search.css'
 
-class Search extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            // input variables
-            locationName: "",
-            isCurrentLocation: false,
-            searchRadius: 1,
-            foodCategory: "",
-            isRandomCategory: false,
+const Search = () => {
 
-            hasLocationError: false,
-            hasRadiusError: false,
-            hasCategoryError: false
-        };
-    }
+    const { register, unregister, handleSubmit, getValues, watch, reset, formState: {errors} } = useForm();
+    const onSubmit = handleSubmit((data) => {
+        console.log(data)
+    })
 
-    clickSearch(e) {
-        e.preventDefault();
-        
-        // validation
-        let isLocationEmpty = this.state.locationName === "";
-        let hasLocError = !this.state.isCurrentLocation && isLocationEmpty;
-        let isCategoryEmpty = this.state.foodCategory === "";
-        let hasCategError = !this.state.isRandomCategory && isCategoryEmpty;
-        let isRadiusEmpty = this.state.searchRadius === "";
-        let hasRadiError = !this.state.isRadiusEmpty && isRadiusEmpty;
-        this.setState({
-            hasLocationError: hasLocError,
-            hasCategoryError: hasCategError,
-            hasRadiusError: hasRadiError
-        })
-
-        if (hasLocError || hasCategError || hasRadiError) {
-            return;
+    const changeIsCurrentLocation = (event) => {
+        if (navigator.geolocation) {
+            console.log("it is allowed");
+        } else {
+            console.log("it is not allowed");
         }
-        
-        // TODO search action
-        console.log("no error")
+        const isChecked = event.target.checked;
+        document.getElementById("locationName").disabled = isChecked;
+
+        if (isChecked) {
+            reset({locationName: ""});
+        }
+
     }
 
-    changeLocationName(event) {
-        const inputValue = event.target.value;
-        this.setState({locationName: inputValue});
-    }
-
-    changeIsCurrentLocation() {
-        let isCurrentLoc = !this.state.isCurrentLocation;
-        this.setState({isCurrentLocation: isCurrentLoc});
-
-        // enable/disable locationName input
-        document.getElementById("locationName").disabled = isCurrentLoc;
-        if (isCurrentLoc) {
-            this.setState({locationName: ""});
+    const changeIsRandomCategory = (event) => {
+        const isChecked = event.target.checked;
+        document.getElementById("foodCategory").disabled = isChecked;
+        if (isChecked) {
+            reset({foodCategory: ""});
         }
     }
 
-    changeSearchRadius(event) {
-        const inputValue = event.target.value;
-        this.setState({searchRadius: inputValue});
-    }
-
-    changeFoodCategory(event) {
-        const inputValue = event.target.value;
-        this.setState({foodCategory: inputValue});
-    }
-
-    changeIsRandomCategory() {
-        let isRandomCateg = !this.state.isRandomCategory;
-        this.setState({isRandomCategory: isRandomCateg});
-
-        // enable/disable foodCategory input
-        document.getElementById("foodCategory").disabled = isRandomCateg;
-        if (isRandomCateg) {
-            this.setState({foodCategory: ""});
-        }
-    }
-
-    render() {
-        let locationErrorText, categoryErrorText, radiusErrorText;
-        if (this.state.hasLocationError) {
-            locationErrorText = (
-                <p className='wte__search-errormsg'>Please enter location name or select your current location.</p>
-            )
-        }
-        if (this.state.hasCategoryError) {
-            categoryErrorText = (
-                <p className='wte__search-errormsg'>Please enter food category or choose to randomize the category.</p>
-            )
-        }
-        if (this.state.hasRadiusError) {
-            radiusErrorText = (
-                <p className='wte__search-errormsg-radius'>Please enter search radius.</p>
-            )
-        }
-        return (
-            <form onSubmit={(e) => {this.clickSearch(e)}}>
-                <div className='wte__search'>
-                    <div className='wte__search-container'>
-                        <div className='wte__search-content'>
-                            <h4>Location</h4>
-                            <div className='wte__search-textblock'>
-                                <div className='wte__search-textbox'>
-                                    <input type="text" id="locationName" name="locationName" placeholder=" " autocomplete="off" aria-labelledby="locationNamePlaceholder"
-                                        value={this.state.locationName}
-                                        onChange={(event) => {this.changeLocationName(event)}}
-                                    />
-                                    <label className="wte__search-textbox-placeholder" for="locationName" id="locationNamePlaceholder">
-                                        <div className="wte__search-textbox-str">Name of location</div>
-                                    </label>
-                                </div>
-                                {locationErrorText}
-                            </div>
-                            <label className='wte__search-checkbox'>Choose your current location
-                                <input type="checkbox" 
-                                    checked={this.state.isCurrentLocation}
-                                    onChange={() => {this.changeIsCurrentLocation()}}
+    return (
+        <>
+        <form onSubmit={onSubmit}>
+            <div className='wte__search'>
+                <div className='wte__search-container'>
+                    <div className='wte__search-content'>
+                        <h4>Location</h4>
+                        <div className='wte__search-textblock'>
+                            <div className='wte__search-textbox'>
+                                <input type="text" id="locationName" name="locationName" placeholder=" " autocomplete="off" aria-labelledby="locationNamePlaceholder"
+                                    {...register("locationName", {
+                                        validate: {
+                                            required: value => {
+                                                console.log("value", value);
+                                                if (!value && !getValues("isCurrentLocation")) {
+                                                    return "Please enter location name or select your current location.";
+                                                }
+                                            },
+                                        },
+                                    })}
                                 />
-                                <span className='wte__search-checkmark'></span>
-                            </label>
-                            <div className='wte__search-textbox wte__search-numberbox'>
-                                <label for="searchRadius">Search radius:</label>
-                                <input type="number" id="searchRadius" 
-                                    value={this.state.searchRadius}
-                                    onChange={(event) => {this.changeSearchRadius(event)}}
-                                />
-                                <span>km</span>
-                                {radiusErrorText}
+                                <label className="wte__search-textbox-placeholder" for="locationName" id="locationNamePlaceholder">
+                                    <div className="wte__search-textbox-str">Name of location</div>
+                                </label>
                             </div>
+                            {errors.locationName && <p className='wte__search-errormsg'>{errors.locationName.message}</p>}               
                         </div>
-                        <div className='wte__search-content'>
-                            <h4>Food category</h4>
-                            <div className='wte__search-textblock'>
-                                <div className='wte__search-textbox'>
-                                    <input type="text" id="foodCategory" name="foodCategory" placeholder=" " autocomplete="off" aria-labelledby='foodCategoryPlaceholdere'
-                                        value={this.state.foodCategory}
-                                        onChange={(event) => {this.changeFoodCategory(event)}}
-                                    />
-                                    <label className="wte__search-textbox-placeholder" for="foodCategory" id="foodCategoryPlaceholder">
-                                        <div className='wte__search-textbox-str'>Food category you'd like</div>
-                                    </label>
-                                </div>
-                                {categoryErrorText}
-                            </div>
-                            <label className='wte__search-checkbox'>Randomize the food category
-                                <input type="checkbox" 
-                                    checked={this.state.isRandomCategory}
-                                    onChange={() => {this.changeIsRandomCategory()}}
-                                />
-                                <span className='wte__search-checkmark'></span>
-                            </label>
+                        <label className='wte__search-checkbox'>Choose your current location
+                            <input type="checkbox" 
+                                name="isCurrentLocation"
+                                {...register("isCurrentLocation", {
+                                    onChange: (e) => {changeIsCurrentLocation(e)}
+                                })}
+                            />
+                            <span className='wte__search-checkmark'></span>
+                        </label>
+                        <div className='wte__search-textbox wte__search-numberbox'>
+                            <label for="searchRadius">Search radius:</label>
+                            <input type="number" id="searchRadius"
+                                {...register("searchRadius", {required: "Please enter search radius."})}
+                            />
+                            <span>km</span>
+                            {errors.searchRadius && <p className='wte__search-errormsg-radius'>{errors.searchRadius.message}</p>}
                         </div>
                     </div>
-                    <div className='wte__search-button'>
-                        <button type="submit">Search</button>
-                        <p>I'm hungry...</p>
+                    <div className='wte__search-content'>
+                        <h4>Food category</h4>
+                        <div className='wte__search-textblock'>
+                            <div className='wte__search-textbox'>
+                                <input type="text" id="foodCategory" name="foodCategory" placeholder=" " autocomplete="off" aria-labelledby='foodCategoryPlaceholdere'
+                                    {...register("foodCategory", {
+                                        validate: {
+                                            required: value => {
+                                                if(!value && !getValues("isRandomCategory")) return "Please enter food category or choose to randomize the category.";
+                                            },
+                                        },
+                                    })}
+                                />
+                                <label className="wte__search-textbox-placeholder" for="foodCategory" id="foodCategoryPlaceholder">
+                                    <div className='wte__search-textbox-str'>Food category you'd like</div>
+                                </label>
+                            </div>
+                            {errors.foodCategory && <p className='wte__search-errormsg'>{errors.foodCategory.message}</p>}
+                        </div>
+                        <label className='wte__search-checkbox'>Randomize the food category
+                            <input type="checkbox" 
+                                {...register("isRandomCategory", {
+                                    onChange: (e) => {changeIsRandomCategory(e)}
+                                })}
+                            />
+                            <span className='wte__search-checkmark'></span>
+                        </label>
                     </div>
                 </div>
-            </form>
-        )
-    }
+                <div className='wte__search-button'>
+                    <button type="submit">Search</button>
+                    <p>I'm hungry...</p>
+                </div>
+            </div>
+        </form>
+        </>
+    );
 }
 
 export default Search
