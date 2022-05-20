@@ -351,4 +351,10 @@
         font-size: 13px;
         -webkit-text-stroke: 0.2px var(--color-ivory);
     }
+    .wte__search-checkbox .wte__search-checkmark:after {
+        left: 4px;
+        top: 0;
+        width: 3px;
+        height: 9px;
+    }
 }
