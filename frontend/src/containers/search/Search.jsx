@@ -5,22 +5,36 @@ import './search.css'
 const Search = () => {
 
     const { register, unregister, handleSubmit, getValues, watch, reset, formState: {errors} } = useForm();
+    const [coords, setCoords] = useState({
+        latitude: null,
+        longitude: null
+    });
+    const [geoDisabled, setGeoDisabled] = useState(true);
     const onSubmit = handleSubmit((data) => {
         console.log(data)
-    })
+    });
 
     const changeIsCurrentLocation = (event) => {
-        if (navigator.geolocation) {
-            console.log("it is allowed");
-        } else {
-            console.log("it is not allowed");
-        }
-        const isChecked = event.target.checked;
-        document.getElementById("locationName").disabled = isChecked;
 
-        if (isChecked) {
-            reset({locationName: ""});
+        if (!navigator.geolocation) {
+            console.log("it is not allowed");
+            return;
         }
+        navigator.geolocation.getCurrentPosition((position) => {
+            setCoords({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            });
+            const isChecked = event.target.checked;
+            document.getElementById("locationName").disabled = isChecked;
+
+            if (isChecked) {
+                reset({locationName: ""});
+            }
+        }, (error) => {
+            console.log("unable to set", error);
+            reset({isCurrentLocation: false});
+        });   
 
     }
 
@@ -45,7 +59,6 @@ const Search = () => {
                                     {...register("locationName", {
                                         validate: {
                                             required: value => {
-                                                console.log("value", value);
                                                 if (!value && !getValues("isCurrentLocation")) {
                                                     return "Please enter location name or select your current location.";
                                                 }
@@ -64,7 +77,8 @@ const Search = () => {
                                 name="isCurrentLocation"
                                 {...register("isCurrentLocation", {
                                     onChange: (e) => {changeIsCurrentLocation(e)}
-                                })}
+                                }
+                                )}
                             />
                             <span className='wte__search-checkmark'></span>
                         </label>
