@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useForm } from 'react-hook-form'
 import './search.css'
+import { GOOGLE_API_KEY, YELP_API_KEY } from '../../key.js'
 
 const Search = () => {
 
@@ -11,7 +12,15 @@ const Search = () => {
     });
     const [geoDisabled, setGeoDisabled] = useState(true);
     const onSubmit = handleSubmit((data) => {
-        console.log(data)
+        var url = "https://api.yelp.com/v3/businesses/search";
+
+        var response = fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': "Bearer " + YELP_API_KEY
+            }
+        });
+        console.log(response);
     });
 
     const changeIsCurrentLocation = (event) => {
