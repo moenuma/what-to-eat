@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { useForm, useWatch } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import './search.css'
 
 const Search = () => {
@@ -15,28 +15,27 @@ const Search = () => {
     });
 
     const changeIsCurrentLocation = (event) => {
+        const isChecked = event.target.checked;
+        document.getElementById("locationName").disabled = isChecked;
 
-        if (!navigator.geolocation) {
-            console.log("it is not allowed");
-            return;
+        if (!geoDisabled && isChecked) {
+            reset({locationName: ""});
+            navigator.geolocation.getCurrentPosition((position) => {
+                setCoords({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                });
+            });   
         }
-        navigator.geolocation.getCurrentPosition((position) => {
-            setCoords({
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude
-            });
-            const isChecked = event.target.checked;
-            document.getElementById("locationName").disabled = isChecked;
-
-            if (isChecked) {
-                reset({locationName: ""});
-            }
-        }, (error) => {
-            console.log("unable to set", error);
-            reset({isCurrentLocation: false});
-        });   
-
     }
+
+    useEffect(() => {
+        if (geoDisabled) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                setGeoDisabled(false);
+            });
+        } 
+    }, [geoDisabled]);
 
     const changeIsRandomCategory = (event) => {
         const isChecked = event.target.checked;
@@ -72,16 +71,21 @@ const Search = () => {
                             </div>
                             {errors.locationName && <p className='wte__search-errormsg'>{errors.locationName.message}</p>}               
                         </div>
-                        <label className='wte__search-checkbox'>Choose your current location
-                            <input type="checkbox" 
-                                name="isCurrentLocation"
-                                {...register("isCurrentLocation", {
-                                    onChange: (e) => {changeIsCurrentLocation(e)}
-                                }
-                                )}
-                            />
-                            <span className='wte__search-checkmark'></span>
-                        </label>
+                        <div className='wte__search-checkblock'>
+                            <label className='wte__search-checkbox'>Choose your current location
+                                <input type="checkbox" 
+                                    name="isCurrentLocation"
+                                    {...register("isCurrentLocation", {
+                                        onChange: (e) => {changeIsCurrentLocation(e)},
+                                        disabled: geoDisabled,
+                                    }
+                                    )}
+                                />
+                                <span className='wte__search-checkmark'></span>
+                            </label>
+                            {geoDisabled && <p className="wte__search-errormsg-checkbox">(Please enable geolocation accesss on your browser.)</p>}
+                        </div>
+                        
                         <div className='wte__search-textbox wte__search-numberbox'>
                             <label for="searchRadius">Search radius:</label>
                             <input type="number" id="searchRadius"
