@@ -12,14 +12,18 @@ const Search = () => {
     });
     const [geoDisabled, setGeoDisabled] = useState(true);
     const onSubmit = handleSubmit((data) => {
-        var url = "https://api.yelp.com/v3/businesses/search";
+        var url = "https://api-what-two-eat.herokuapp.com/search/";
 
         var response = fetch(url, {
             method: 'GET',
             headers: {
-                'Authorization': "Bearer " + YELP_API_KEY
+                "accept": "application/json",
+                "x-requested-with": "xmlhttprequest",
             }
-        });
+        })
+        .then(response => response.text())
+        .then(result => console.log("result", result))
+        .then(error => console.log("error", error));
         console.log(response);
     });
 
