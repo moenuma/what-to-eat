@@ -1,8 +1,8 @@
 .wte__search {
     background-image: url(../../assets/eating.svg);
     background-repeat: no-repeat;
-    background-size: 45rem;
-    background-position: bottom 11.5rem right 6.5rem;
+    background-size: 43rem;
+    background-position: bottom 9rem right 1rem;
     position: fixed;
     width: 100%;
     height: 100%;
@@ -10,21 +10,15 @@
 
 @media screen and (max-width: 1000px) {
     .wte__search {
-        background-size: 35rem;
-        background-position: bottom 9rem right 3rem;
-    }
-}
-
-@media screen and (max-width: 750px) {
-    .wte__search {
-        /* background-size: 30rem; */
+        background-size: 60%;
+        /* background-position: 50% 75%; */
         background-position: bottom 7rem right 1rem;
     }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     .wte__search {
-        background-size: 25rem;
+        background-size: 85%;
         background-position: 50% 75%;
     }
 }
@@ -42,14 +36,14 @@
 
 .wte__search-content h4 {
     font-family: var(--font-family);
-    font-weight: 500;
-    font-size: 30px;
-    line-height: 40px;
     color: var(--color-gray);
+    font-weight: 500;
+    font-size: 27px;
+    line-height: 37px;
 }
 
 .wte__search-textblock {
-    margin: 1rem 0;
+    margin: 0.8rem 0;
 }
 
 .wte__search-textbox {
@@ -58,9 +52,9 @@
 
 .wte__search-textbox input {
     width: 100%;
-    height: 3rem;
+    height: 2.9rem;
     font-family: var(--font-family);
-    font-size: 16px;
+    font-size: 14px;
     padding: 0 0.8rem;
     border: 2px solid #818181;
     border-radius: 0.5rem;
@@ -81,7 +75,7 @@
 
 .wte__search-textbox-str {
     color: #818181;
-    font-size: 16px;
+    font-size: 15px;
     padding: 0 0.8rem;
     background-color: transparent;
     font-family: var(--font-family);
@@ -98,7 +92,7 @@
 .wte__search-textbox input:focus + .wte__search-textbox-placeholder .wte__search-textbox-str {
     padding: 0 0.2rem;
     margin: 0 0.6rem;
-    font-size: 13px;
+    font-size: 12px;
     background-color: white;
     transform: translate(0, -165%);
     border-color: blueviolet;
@@ -107,7 +101,7 @@
 
 .wte__search-textbox input:not(:placeholder-shown) + .wte__search-textbox-placeholder .wte__search-textbox-str {
     background-color: white;
-    font-size: 13px;
+    font-size: 12px;
     transform: translate(0, -165%);
     padding: 0 0.2rem;
     margin: 0 0.6rem;
@@ -123,14 +117,14 @@
     padding-left: 0.5rem;
     color: var(--color-error);
     font-family: var(--font-family);
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .wte__search-errormsg-radius {
     margin-left: 0.5rem;
     color: var(--color-error);
     font-family: var(--font-family);
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .wte__search-errormsg-checkbox {
@@ -138,10 +132,12 @@
     margin: 1rem 0 1rem 0.5rem;
     font-family: var(--font-family);
     color: var(--color-gray);
+    font-size: 14px;
 }
 
 .wte__search-checkblock {
     display: flex;
+    align-items: center;
     margin-top: -0.9rem;
 }
 
@@ -152,7 +148,7 @@
     margin: 1rem 0;
     cursor: pointer;
     font-family: var(--font-family);
-    font-size: 16px;
+    font-size: 15px;
     color: var(--color-gray);
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -170,8 +166,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 19px;
-    width: 19px;
+    height: 18px;
+    width: 18px;
     border: 2px solid gray;
     border-radius: 0.2rem;
     -moz-box-shadow:    inset 0 0 2px gray;
@@ -201,7 +197,7 @@
 }
 
 .wte__search-checkbox .wte__search-checkmark:after {
-    left: 5px;
+    left: 4px;
     top: 0;
     width: 4px;
     height: 10px;
@@ -253,7 +249,7 @@
     display: flex;
     align-items: center;
     font-family: var(--font-family);
-    font-size: 17px;
+    font-size: 15px;
     color: var(--color-gray);
 }
 
@@ -263,9 +259,9 @@
 
 .wte__search-numberbox input {
     width: 5rem;
-    height: 2.5rem;
+    height: 2.4rem;
     font-family: var(--font-family);
-    font-size: 16px;
+    font-size: 14px;
     padding: 0 0.8rem;
     border-bottom: 1.5px solid var(--color-gray);
 }
@@ -280,7 +276,7 @@
     justify-content: center;
     flex-direction: column;
     position: fixed;
-    bottom: 5rem;
+    bottom: 4rem;
     left: 50%;
     right: 50%;
 }
@@ -297,7 +293,7 @@
     text-decoration: none;
     font-family: var(--font-family);
     font-weight: 400;
-    font-size: 22px;
+    font-size: 20px;
     letter-spacing: 0.06em;
     color: var(--color-ivory);
     text-align: center;
@@ -335,7 +331,7 @@
     font-family: var(--font-family);
     color: var(--color-gray);
     -webkit-text-stroke: 0.4px var(--color-ivory);
-    width: 100px
+    width: 100px;
 }
 
 .wte__search img {
