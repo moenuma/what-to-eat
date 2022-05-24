@@ -19,6 +19,14 @@ const Search = () => {
             headers: {
                 "accept": "application/json",
                 "x-requested-with": "xmlhttprequest",
+            },
+            data: {
+                "locationName": data["location"],
+                "latitude": coords.latitude,
+                "longitude": coords.longitude,
+                "searchRadius": data["searchRadius"],
+                "foodCategory": data["foodCategory"],
+                "isRandom": data["isRandomCategory"]
             }
         })
         .then(response => response.text())
